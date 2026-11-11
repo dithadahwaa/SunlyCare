@@ -1,0 +1,759 @@
+
+:root {
+    --peach: #ffe1c3;
+    --peach2: #ffedda;
+    --orange: #f9b96d;
+    --brown: #75432d;
+    --cream: #fff4e8;
+    --ink: #302019;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5e5d4;
+    color: var(--ink);
+    font-family: Arial, sans-serif;
+}
+
+button, input, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+.app {
+    width: min(100%, 430px);
+    min-height: 100dvh;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        145deg,
+        #ffe8d2,
+        #ffc47d 48%,
+        #ffe4c4
+    );
+    padding-bottom: 78px;
+    box-shadow: 0 0 55px #70411b20;
+}
+
+.app::before,
+.app::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    background: #fff0d0;
+    opacity: .48;
+    clip-path: polygon(
+        50% 0, 61% 34%, 98% 35%,
+        69% 57%, 80% 94%, 50% 70%,
+        20% 94%, 31% 57%, 2% 35%, 39% 34%
+    );
+}
+
+.app::before {
+    width: 115px;
+    height: 115px;
+    right: -42px;
+    top: 18px;
+}
+
+.app::after {
+    width: 75px;
+    height: 75px;
+    left: -35px;
+    bottom: 100px;
+}
+
+.screen {
+    display: none;
+    position: relative;
+    z-index: 1;
+    padding: 20px 16px 18px;
+    min-height: calc(100dvh - 78px);
+    animation: fade .2s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.logo {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: #ff9f1c;
+    font-size: 23px;
+    line-height: 1;
+}
+
+.logo small {
+    display: block;
+    font: 10px Arial;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 30px;
+    line-height: 1.48;
+    color: var(--brown);
+    margin: 8px 0 4px;
+    font-weight: 750;
+}
+
+h2 {
+    font-size: 21px;
+    color: var(--brown);
+}
+
+h3 {
+    font-size: 16px;
+    color: var(--brown);
+    margin-bottom: 8px;
+}
+
+p {
+    line-height: 1.4;
+}
+
+.home-head {
+    min-height: 320px;
+    padding: 6px 4px 12px;
+}
+
+.home-head .logo {
+    margin-bottom: 8px;
+}
+
+.home-head p {
+    font-size: 16px;
+    color: #211710;
+}
+
+.pill {
+    border-radius: 30px;
+    background: var(--orange);
+    color: var(--brown);
+    padding: 14px 21px;
+    font-weight: 700;
+}
+
+.pill:hover,
+.small-btn:hover {
+    filter: brightness(.97);
+    transform: translateY(-1px);
+}
+
+.primary {
+    width: 100%;
+    font-size: 16px;
+    margin: 12px 0;
+    background: var(--orange);
+    padding: 16px;
+    border-radius: 30px;
+    color: var(--brown);
+    font-weight: 750;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    color: var(--brown);
+    font-weight: 750;
+    font-size: 18px;
+}
+
+.back {
+    background: transparent;
+    color: var(--brown);
+    font-size: 34px;
+    line-height: 1;
+    padding: 0 3px;
+}
+
+/* NAVIGASI BAWAH */
+
+.nav {
+    position: absolute;
+    z-index: 5;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    background: #ffd18f;
+    border-radius: 13px 13px 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 5px;
+}
+
+.nav button {
+    background: transparent;
+    color: #805039;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    font-size: 12px;
+}
+
+.nav button.active {
+    background: #eab97f;
+}
+
+.nav button span {
+    font-size: 25px;
+}
+
+/* FITUR BERANDA */
+
+.feature-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    text-align: center;
+    margin: 8px 0 22px;
+}
+
+.feature {
+    font-size: 12px;
+    color: #82583f;
+}
+
+.feature-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #fff0d8;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 7px;
+    color: var(--brown);
+    font-size: 30px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-btn {
+    background: transparent;
+    color: #805039;
+    font-size: 12px;
+}
+
+.brand-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.brand {
+    background: white;
+    border-radius: 17px;
+    min-height: 52px;
+    display: grid;
+    place-items: center;
+    font-weight: 750;
+    color: #333;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.brand:nth-child(2) {
+    color: #54b8c0;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.brand:nth-child(3) {
+    font-family: Georgia, serif;
+    font-size: 20px;
+}
+
+.brand:nth-child(4) {
+    grid-column: 1;
+    margin-left: 35%;
+    width: 100%;
+}
+
+.brand:nth-child(5) {
+    grid-column: 2 / 4;
+    width: 58%;
+    margin-left: 20%;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+/* PENCARIAN DAN FILTER */
+
+.search-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-row input {
+    flex: 1;
+    border: 0;
+    border-radius: 28px;
+    background: #fff0d8;
+    padding: 14px 18px;
+    color: var(--brown);
+    outline: none;
+    min-width: 0;
+}
+
+.filter-btn {
+    width: 62px;
+    border-radius: 20px;
+    background: #fff0d8;
+    color: var(--brown);
+    font-size: 23px;
+}
+
+.chips {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+}
+
+.chip {
+    white-space: nowrap;
+    border-radius: 20px;
+    background: #ffe6c7;
+    color: var(--brown);
+    padding: 9px 13px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.chip.active {
+    background: #986747;
+    color: white;
+}
+
+/* KARTU PRODUK */
+
+.product-list {
+    display: grid;
+    gap: 22px;
+}
+
+.product-card {
+    background: #fff0df;
+    border-radius: 38px;
+    padding: 22px 17px;
+    display: grid;
+    grid-template-columns: 43% 57%;
+    align-items: center;
+    min-height: 210px;
+    gap: 4px;
+    box-shadow: 0 12px 32px #9b61301a;
+}
+
+.product-info {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #77452f;
+}
+
+.product-info strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.price {
+    font-weight: 800;
+    margin: 8px 0;
+}
+
+.small-btn {
+    border-radius: 20px;
+    background: #f8b866;
+    color: #7a4b30;
+    padding: 7px 14px;
+    font-size: 11px;
+}
+
+.more {
+    display: block;
+    margin: 14px auto 0;
+    background: #f8c47c;
+    border-radius: 8px;
+    padding: 8px 30px;
+    color: #71452e;
+    font-weight: 700;
+}
+
+/* ILUSTRASI BOTOL PRODUK */
+
+.bottle {
+    height: 142px;
+    width: 105px;
+    margin: auto;
+    position: relative;
+    border-radius: 44% 44% 20% 20% / 35% 35% 12% 12%;
+    background: linear-gradient(
+        100deg,
+        #fff,
+        #f6e5d4 35%,
+        #d8c5b4 72%,
+        #fff
+    );
+    box-shadow:
+        inset -8px 0 13px #9a806333,
+        0 9px 13px #9b673322;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: #46362b;
+    font-family: Georgia, serif;
+}
+
+.bottle::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 38%;
+    border-radius: 0 0 18px 18px;
+    background: linear-gradient(#14b5eb, #0071b8);
+    border-top: 3px solid #2a3b4a;
+}
+
+.brandname,
+.bottletext {
+    z-index: 1;
+}
+
+.brandname {
+    font-size: 11px;
+}
+
+.bottletext {
+    font: 7px Arial;
+    margin-top: 5px;
+}
+
+.bottle.teal {
+    width: 95px;
+    height: 145px;
+    border-radius: 45% 45% 30% 30%;
+    background: linear-gradient(100deg, #bafff2, #22c9bd 65%, #079e9b);
+    color: #087e7c;
+}
+
+.bottle.teal::before {
+    display: none;
+}
+
+.bottle.teal .brandname,
+.bottle.teal .bottletext {
+    color: white;
+}
+
+/* ANALISIS KULIT */
+
+.upload-intro {
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--brown);
+    margin: 30px 8px 22px;
+}
+
+.upload-box {
+    background: #fff0df;
+    border-radius: 38px;
+    min-height: 235px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    text-align: center;
+    color: #74452e;
+}
+
+.camera-icon {
+    width: 80px;
+    height: 62px;
+    margin-bottom: 12px;
+    fill: #d6c3b1;
+    stroke: #1d1713;
+    stroke-width: 1.5;
+}
+
+.upload-box strong {
+    font-size: 17px;
+    margin: 8px;
+}
+
+.upload-box label {
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.upload-box input {
+    display: none;
+}
+
+.preview {
+    max-width: 100%;
+    max-height: 180px;
+    border-radius: 18px;
+    object-fit: cover;
+    display: none;
+    margin: 0 auto 10px;
+}
+
+.tip {
+    margin: 15px 20px;
+    background: #e8c99f;
+    border-radius: 30px;
+    padding: 18px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.tip-icon {
+    font-size: 36px;
+}
+
+/* HASIL ANALISIS */
+
+.result-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+.result-person {
+    width: 145px;
+    height: 190px;
+    border-radius: 90px;
+    object-fit: cover;
+    background: white;
+    display: block;
+    margin: 12px auto;
+}
+
+.tone-card {
+    background: #ffe9d1;
+    border-radius: 45px;
+    padding: 22px 12px;
+    text-align: center;
+    color: #65402c;
+    font-weight: 750;
+}
+
+.shade-row {
+    display: flex;
+    justify-content: center;
+    gap: 55px;
+    margin: 12px 0 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.shade {
+    width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    margin: 0 auto 6px;
+    background: #f8d8bd;
+}
+
+.shade.two {
+    background: #f6cdbb;
+}
+
+/* DETAIL PRODUK */
+
+.detail-panel {
+    background: #fff0df;
+    border-radius: 34px;
+    padding: 18px 16px;
+    color: #6d432e;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.detail-head {
+    display: grid;
+    grid-template-columns: 37% 63%;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating {
+    color: #e46c23;
+    font-weight: 800;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 15px;
+}
+
+.tag {
+    background: #c4a08a;
+    color: white;
+    border-radius: 18px;
+    padding: 7px 12px;
+    font-size: 11px;
+}
+
+.actions {
+    display: flex;
+    gap: 9px;
+    margin-top: 15px;
+}
+
+.actions button {
+    flex: 1;
+    border-radius: 9px;
+    padding: 12px 8px;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.cart {
+    background: white;
+    color: #74452e;
+}
+
+.buy {
+    background: #ff762e;
+    color: white;
+}
+
+/* MODAL DAN NOTIFIKASI */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #2d1a12a8;
+    z-index: 20;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: min(100%, 390px);
+    background: #fff0df;
+    border-radius: 25px;
+    padding: 18px;
+    color: #70452e;
+}
+
+.modal-box video {
+    width: 100%;
+    border-radius: 16px;
+    background: #211;
+}
+
+.modal-box textarea {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    resize: vertical;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+.toast {
+    position: fixed;
+    z-index: 30;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #70452e;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 25px;
+    display: none;
+    max-width: 90%;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* RESPONSIVE UNTUK LAPTOP DAN TABLET */
+
+@media (min-width: 700px) {
+    body {
+        padding: 24px 0;
+    }
+
+    .app {
+        min-height: min(900px, calc(100dvh - 48px));
+        border-radius: 28px;
+    }
+
+    .screen {
+        min-height: calc(min(900px, 100dvh - 48px) - 72px);
+    }
+
+    .nav {
+        border-radius: 13px 13px 28px 28px;
+    }
+
+    .toast {
+        bottom: 110px;
+    }
+}

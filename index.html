@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SunlyCare - Sunscreen Recommendation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- BERANDA -->
+    <section class="screen active" id="home">
+        <div class="home-head">
+            <div class="logo">☼ Sunly<small>CARE</small></div>
+
+            <h1>Find Your<br>Perfect<br>Sunscreen</h1>
+
+            <p>
+                Kenali warna dan tipe kulitmu,
+                dapatkan rekomendasi shade tinted
+                sunscreen yang paling cocok.
+            </p>
+
+            <button class="pill" onclick="go('analysis')">
+                Mulai Analisis Kulit →
+            </button>
+        </div>
+
+        <h3>Fitur Unggulan</h3>
+
+        <div class="feature-row">
+            <div class="feature">
+                <div class="feature-icon">⌕</div>
+                Deteksi Warna<br>Kulit
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">♢</div>
+                Rekomendasi<br>Sunscreen
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">☆</div>
+                Temukan<br>Produk Terbaik
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h3>Brand Populer</h3>
+            <button class="text-btn" onclick="go('products')">
+                Lihat Semua ›
+            </button>
+        </div>
+
+        <div class="brand-grid">
+            <div class="brand">SKINTIFIC</div>
+            <div class="brand">Wardah</div>
+            <div class="brand">azarine</div>
+            <div class="brand">lavojoy</div>
+            <div class="brand">GRACE AND GLOW</div>
+        </div>
+    </section>
+
+
+    <!-- HALAMAN SUNSCREEN -->
+    <section class="screen" id="products">
+
+        <div class="topbar">
+            <button class="back" onclick="go('home')">‹</button>
+            Sunscreen Recommendation
+        </div>
+
+        <div class="search-row">
+            <input
+                type="text"
+                id="search"
+                placeholder="⌕ Cari Sunscreen..."
+                oninput="renderProducts()"
+            >
+
+            <button class="filter-btn" onclick="toggleFilters()">
+                ☷
+            </button>
+        </div>
+
+        <div class="chips" id="filters">
+            <button class="chip active" data-filter="Semua"
+                onclick="setFilter(this)">Semua</button>
+
+            <button class="chip" data-filter="Chemical"
+                onclick="setFilter(this)">Chemical</button>
+
+            <button class="chip" data-filter="Physical"
+                onclick="setFilter(this)">Physical</button>
+
+            <button class="chip" data-filter="Tinted"
+                onclick="setFilter(this)">Tinted</button>
+        </div>
+
+        <div class="product-list" id="productList"></div>
+
+        <button class="more" onclick="showToast('Semua produk sudah ditampilkan')">
+            Selengkapnya ↓
+        </button>
+    </section>
+
+
+    <!-- HALAMAN ANALISIS KULIT -->
+    <section class="screen" id="analysis">
+
+        <div class="topbar">
+            <button class="back" onclick="go('home')">‹</button>
+            Skin Tone Detector
+        </div>
+
+        <p class="upload-intro">
+            Unggah foto wajah untuk mengetahui
+            warna kulitmu dan mendapatkan
+            rekomendasi shade terbaik
+        </p>
+
+        <div class="upload-box">
+
+            <svg class="camera-icon" viewBox="0 0 90 70">
+                <path d="M8 19q0-8 9-8h14l7-9h18l7 9h10q9 0 9 9v39q0 9-9 9H17Q8 67 8 58z"/>
+                <circle cx="45" cy="38" r="16"/>
+                <circle cx="72" cy="19" r="3"/>
+            </svg>
+
+            <img id="preview" class="preview" alt="Foto wajah">
+
+            <strong>Unggah Foto</strong>
+
+            <label for="photo">
+                Klik atau tarik foto di sini
+                <br>(JPG, PNG)
+            </label>
+
+            <input
+                type="file"
+                id="photo"
+                accept="image/png,image/jpeg,image/webp"
+                onchange="loadPhoto(event)"
+            >
+
+            <button class="small-btn" onclick="openCamera()">
+                Buka Kamera
+            </button>
+
+        </div>
+
+        <button class="primary" onclick="analyze()">
+            Analisis Warna Kulit →
+        </button>
+
+        <div class="tip">
+            <span class="tip-icon">♧</span>
+            <span>
+                <b>Tips:</b><br>
+                Gunakan foto dalam pencahayaan
+                alami dan tanpa filter, ya!
+            </span>
+        </div>
+
+    </section>
+
+
+    <!-- HALAMAN HASIL ANALISIS -->
+    <section class="screen" id="result">
+
+        <div class="topbar">
+            <button class="back" onclick="go('analysis')">‹</button>
+            Hasil Analisis
+        </div>
+
+        <div class="result-top">
+
+            <img id="resultPhoto" class="result-person" alt="Foto hasil analisis">
+
+            <div class="tone-card">
+                Skin Tone :
+                <br>
+                <span id="tone">Light</span>
+            </div>
+
+        </div>
+
+        <h3>Rekomendasi Shade</h3>
+
+        <div class="shade-row">
+            <div>
+                <div class="shade"></div>
+                0NC Porcelain
+            </div>
+
+            <div>
+                <div class="shade two"></div>
+                1NC Vanilla
+            </div>
+        </div>
+
+        <h3>Sunscreen yang Cocok</h3>
+
+        <div class="product-card">
+            <div class="bottle">
+                <span class="brandname">SKINTIFIC</span>
+                <span class="bottletext">TINTED SUNSCREEN SPF 50+</span>
+            </div>
+
+            <div class="product-info">
+                <strong>
+                    SKINTIFIC All Day Protect Tinted Serum Sunscreen
+                    SPF 50+ PA++++ 0NC PORCELAIN 30g
+                </strong>
+
+                <div class="price">Rp 120.000</div>
+
+                <button class="small-btn" onclick="openProduct(0)">
+                    Lihat Detail →
+                </button>
+            </div>
+        </div>
+
+        <button class="primary" onclick="go('products')">
+            Lihat Produk Lainnya
+        </button>
+
+    </section>
+
+
+    <!-- HALAMAN DETAIL PRODUK -->
+    <section class="screen" id="detail">
+
+        <div class="topbar">
+            <button class="back" onclick="go(lastScreen)">‹</button>
+            Detail Produk
+
+            <button class="text-btn" onclick="showReviews()">
+                ♧ Kritik & Saran
+            </button>
+        </div>
+
+        <div class="detail-panel">
+
+            <div class="detail-head">
+
+                <div class="bottle">
+                    <span class="brandname">SKINTIFIC</span>
+                    <span class="bottletext">TINTED SUNSCREEN SPF 50+</span>
+                </div>
+
+                <div>
+                    <b id="detailName"></b>
+                    <br>
+
+                    <span class="rating">4.9 (10k+ ulasan)</span>
+
+                    <div class="price" id="detailPrice"></div>
+                </div>
+
+            </div>
+
+            <div class="tags">
+                <span class="tag">SPF 50+ PA++++</span>
+                <span class="tag">Light Skin</span>
+            </div>
+
+            <b>Deskripsi Produk</b>
+
+            <p id="detailDesc"></p>
+
+            <b>Cocok untuk:</b>
+
+            <div class="tags">
+                <span class="tag">Kulit Sensitif</span>
+                <span class="tag">Semua Jenis Kulit</span>
+            </div>
+
+            <div class="actions">
+
+                <button class="cart" onclick="addCart()">
+                    + Keranjang (<span id="cartCount">0</span>)
+                </button>
+
+                <button class="buy" onclick="buyNow()">
+                    Beli Sekarang
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="cartMessage"></div>
+
+    </section>
+
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="nav">
+
+        <button class="active" data-page="home" onclick="go('home')">
+            <span>⌂</span>
+            Beranda
+        </button>
+
+        <button data-page="products" onclick="go('products')">
+            <span>⌕</span>
+            Sunscreen
+        </button>
+
+        <button data-page="analysis" onclick="go('analysis')">
+            <span>◎</span>
+            Analisis Kulit
+        </button>
+
+        <button data-page="result" onclick="go('result')">
+            <span>♧</span>
+            Hasil Analisis
+        </button>
+
+    </nav>
+
+</div>
+
+
+<!-- MODAL KAMERA -->
+<div class="modal" id="cameraModal">
+    <div class="modal-box">
+
+        <h3>Ambil Foto Wajah</h3>
+
+        <video id="video" autoplay playsinline></video>
+
+        <div class="modal-actions">
+            <button class="pill" onclick="capture()">Ambil Foto</button>
+            <button class="pill" onclick="closeCamera()">Tutup</button>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- MODAL KRITIK DAN SARAN -->
+<div class="modal" id="reviewModal">
+    <div class="modal-box">
+
+        <h3>Kritik & Saran</h3>
+
+        <p>Bantu kami meningkatkan pengalaman SunlyCare.</p>
+
+        <textarea id="reviewText" rows="4"
+            placeholder="Tulis ulasan kamu..."></textarea>
+
+        <div class="modal-actions">
+            <button class="pill" onclick="submitReview()">Kirim</button>
+            <button class="pill" onclick="closeReviews()">Batal</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
